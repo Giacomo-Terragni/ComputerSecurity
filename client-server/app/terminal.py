@@ -37,6 +37,7 @@ def login_client(id, password, server, actions):
     print(response.json())
     return response.json()
 
+
 def logout_client(id):
     response = requests.delete(BASE_URL + "/logout-client", data={"id": id})
     print(response.json())
@@ -58,10 +59,12 @@ if __name__ == "__main__":
                 amount_answers = prompt(amount_questions)  # this is the amount asked in prompt
                 # TODO: check amount is convertible to integer
                 client.increase_counter(int(amount_answers["amount"]))
+                # TODO: update json with new action
             if choice == "Decrease":
                 amount_answers = prompt(amount_questions)  # this is the amount asked in prompt
                 # TODO: check amount is convertible to integer
                 client.decrease_counter(int(amount_answers["amount"]))
+                # TODO: update json with new action
             if choice == "Log out":
                 logout_response = logout_client(client_id)
                 break
@@ -69,3 +72,6 @@ if __name__ == "__main__":
         answer = final_answers["choice"]
         if answer == "Quit":
             break
+            # TODO: output txt file with counters of all clients
+
+# TODO: method to update txt file with every change in counter of every client

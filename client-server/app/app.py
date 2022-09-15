@@ -1,5 +1,4 @@
 from flask import Flask, request, make_response
-from datetime import datetime
 from models.models import *
 
 app = Flask(__name__)
@@ -22,7 +21,7 @@ def login_client():
             return make_response({"error": f"could not log in {str(ex)}"}, 400)
         return make_response({"result": "success"}, 200)
     else:
-        # TODO: check password
+        # TODO: check password if it is the same then handle same user in different devices, if it is not then error
         return
 
 
@@ -35,13 +34,3 @@ def logout_client():
     except Exception as ex:
         return make_response({"error": f"could not log out {str(ex)}"}, 400)
     return make_response({"result": "success"}, 200)
-
-# @app.route("/customer/<customer_id>")
-# def get_customer(customer_id: int):
-#     customer = find_single_customer(id=customer_id)
-#     address = find_single_address(id=customer.address_id)
-#     if customer:
-#         return make_response({"firstname": customer.firstname, "lastname": customer.lastname, "phone": customer.phone_number,
-#                               "street": address.street, "house_number": address.house_number, "city": address.city, "postcode": address.postcode}, 200)
-#     else:
-#         return make_response({"error": f"Customer with id {customer_id} does not exist"}, 400)

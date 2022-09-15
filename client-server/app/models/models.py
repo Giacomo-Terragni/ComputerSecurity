@@ -42,6 +42,7 @@ class Client:
 
 
 def save_client(client: Client):
+    # TODO: check if client is already logged, in case
     clients[client.id] = client
 
 
