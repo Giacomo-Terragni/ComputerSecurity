@@ -19,10 +19,12 @@ def login_client():
             save_client(client)
         except Exception as ex:
             return make_response({"error": f"could not log in {str(ex)}"}, 400)
+        print(clients)
         return make_response({"result": "success"}, 200)
     else:
         # TODO: check password if it is the same then handle same user in different devices, if it is not then error
         return
+
 
 
 # TODO: log in file counter of the client logging out

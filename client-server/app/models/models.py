@@ -38,7 +38,7 @@ class Client:
         self.counter += amount
 
     def decrease_counter(self, amount: int):
-        self.counter += amount
+        self.counter -= amount
 
 
 def save_client(client: Client):
