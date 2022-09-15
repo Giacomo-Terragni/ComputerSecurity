@@ -1,6 +1,6 @@
 import socket
 
-clients = {}
+users = {}
 delay = 0
 
 
@@ -22,36 +22,26 @@ class Actions:
         self.steps.remove(action)
 
 
-class Client:
+class User:
 
     def __init__(self, id: str, password: str, actions: Actions):
-        self.id = id
+        self.id = id # TODO: maybe this could also be name or contain letters
         self.password = password
         self.counter = 0
-        self.server = Server()
-        self.actions = actions
+        self.actions = actions #TODO: probably delete this
 
     def __repr__(self):
-        return f'Client({self.id}, {self.password})'
-
-    def increase_counter(self, amount: int):
-        self.counter += amount
-
-    def decrease_counter(self, amount: int):
-        self.counter -= amount
+        return f'Client({self.id}, {self.password}, {self.counter})'
 
 
-def save_client(client: Client):
+
+def save_user(client: User):
     # TODO: check if client is already logged, in case
-    clients[client.id] = client
-
-
-def get_client(id: int):
-    return clients[id]
+    users[client.id] = client
 
 
 # TODO: check pop works fine
-def delete_client(client: Client):
-    clients.pop(client.id)
+def delete_user(user: User):
+    users.pop(user.id)
 
-# TODO: hash id
+# TODO: hash id and password
