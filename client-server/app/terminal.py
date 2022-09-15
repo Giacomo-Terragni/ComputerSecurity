@@ -2,7 +2,6 @@ import json
 
 from PyInquirer import prompt
 import requests
-from models.sql_model import show_menu, show_order
 
 BASE_URL = "http://localhost:5000"
 
@@ -96,7 +95,6 @@ def cancel_order(order_id):
 
 
 if __name__ == "__main__":
-    show_menu()
     while True:
         answers = prompt(main_list)
         answer = answers["choice"]

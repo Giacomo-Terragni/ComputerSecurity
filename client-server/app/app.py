@@ -12,8 +12,8 @@ def hello_world():
 
 
 @app.route("/create-customer", methods=["POST"])
-def create_customer():
-    from models.sql_model import save_new_customer
+def create_client():
+    from models.client import save_new_customer
 
     firstname = request.form["firstname"]
     lastname = request.form["lastname"]
@@ -33,7 +33,7 @@ def create_customer():
 
 @app.route("/create-order", methods=["POST"])
 def create_order():
-    from models.sql_model import save_new_order, save_new_orderline, find_single_customer, find_single_address, save_available_delivery
+    from models.client import save_new_order, save_new_orderline, find_single_customer, find_single_address, save_available_delivery
     import json
 
     firstname = request.form["firstname"]
@@ -78,7 +78,7 @@ def create_order():
 
 @app.route("/cancel-order", methods=["DELETE"])
 def cancel_order():
-    from models.sql_model import delete_single_delivery, find_single_order
+    from models.client import delete_single_delivery, find_single_order
 
     order_id = request.form["order_id"]
     order = find_single_order(id=order_id)
@@ -103,7 +103,7 @@ def cancel_order():
 
 @app.route("/customer/<customer_id>")
 def get_customer(customer_id: int):
-    from models.sql_model import find_single_customer, find_single_address
+    from models.client import find_single_customer, find_single_address
     customer = find_single_customer(id=customer_id)
     address = find_single_address(id=customer.address_id)
     if customer:
@@ -115,7 +115,7 @@ def get_customer(customer_id: int):
 
 @app.route("/track-order/<order_id>")
 def track_order(order_id: int):
-    from models.sql_model import find_single_order, find_single_delivery
+    from models.client import find_single_order, find_single_delivery
 
     order = find_single_order(id=order_id)
     if order:
