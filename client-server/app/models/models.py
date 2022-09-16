@@ -24,11 +24,10 @@ class Actions:
 
 class User:
 
-    def __init__(self, id: str, password: str, actions: Actions):
+    def __init__(self, id: str, password: str):
         self.id = id
         self.password = password
         self.counter = 0
-        self.actions = actions #TODO: probably delete this: ELENA
 
     def __repr__(self):
         return f'Client({self.id}, {self.password}, {self.counter})'
@@ -43,4 +42,6 @@ def save_user(client: User):
 def delete_user(user: User):
     users.pop(user.id)
 
-# TODO: hash id slides and password -> GIACOMO, ELENA
+def hash(input: str):
+    hashed_input = hashlib.sha256(input.encode('utf-8')).hexdigest()
+    return hashed_input

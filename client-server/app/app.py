@@ -11,11 +11,10 @@ fmt = '%Y-%m-%d %H:%M:%S'  # for datetime calculations
 def login_client():
     id = request.form["id"]
     password = request.form["password"]
-    actions = request.form["actions"]
-    actions = Actions
-    user = User(id, password, actions)
-
-    if id not in users:
+    hash_id = hash(id)
+    hash_password = hash(password)
+    user = User(hash_id, hash_password)
+    if hash_id not in users:
         try:
             save_user(user)
         except Exception as ex:
@@ -23,8 +22,11 @@ def login_client():
         print(users)
         return make_response({"result": "success"}, 200)
     else:
-        # TODO: check password -> GIACO,  ELE
+        for key in users:
+            if users[key].password == hash_password:
+                return make_response({"result": "success"}, 200)
         return make_response({"result": "fail"}, 400)
+
 
 
 @app.route("/logout-client", methods=["DELETE"])
@@ -62,3 +64,4 @@ def decrease_counter():
         return make_response({"error": f"unable to decrease counter {str(ex)}"}, 400)
     print(users)
     return make_response({"result": "success"}, 200)
+
