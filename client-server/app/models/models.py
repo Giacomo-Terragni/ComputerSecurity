@@ -24,11 +24,11 @@ class Actions:
 
 class User:
 
-    def __init__(self, id: str, password: str, actions: Actions):
+    def __init__(self, id: str, password: str):
         self.id = id
         self.password = password
         self.counter = 0
-        self.actions = actions #TODO: probably delete this: ELENA
+        # self.actions = actions #TODO: probably delete this: ELENA
 
     def __repr__(self):
         return f'Client({self.id}, {self.password}, {self.counter})'

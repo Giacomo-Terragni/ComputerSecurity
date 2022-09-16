@@ -1,7 +1,7 @@
 import json
 from models.models import *
 
-from PyInquirer import prompt
+
 import requests
 import json
 import time
@@ -59,6 +59,14 @@ def decrease_counter(id, amount):
     print(response.json())
     return response
 
+
+def update_log(fname, user_id, action, amount):
+    with open(fname, 'a+') as f:
+        f.write(f'{user_id}  {action}  {amount}\n')
+    f.close()
+
+
+
 #TODO> send email -> ERIC
 def run_gui():
     while True:
@@ -89,7 +97,7 @@ def run_gui():
             break
 
 
-#TODO: handle exceptions -> Meli
+# TODO: handle exceptions -> Meli
 # TODO: output txt file with counters of all clients -> ERIC
 
 if __name__ == "__main__":
@@ -103,6 +111,8 @@ if __name__ == "__main__":
     user_id = data["id"]
     password = data["password"]
 
+    logfile = "./logs/server " + data["server"]["ip"] + " " + data["server"]["port"] + " log.txt"
+
     login_client(user_id, password)
     delay = int(data["actions"]["delay"])
 
@@ -112,9 +122,11 @@ if __name__ == "__main__":
             new_casted_amount = step.replace("INCREASE ", "")
             increase_counter(user_id, int(new_casted_amount))
             # TODO: update log file: ERIC
+            update_log(logfile, user_id, "INCREASE", new_casted_amount)
         if "DECREASE" in step:
             new_casted_amount = step.replace("DECREASE ", "")
             decrease_counter(user_id, int(new_casted_amount))
+            update_log(logfile, user_id, "DECREASE", new_casted_amount)
         time.sleep(delay)
 
     f.close()

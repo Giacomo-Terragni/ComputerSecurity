@@ -7,13 +7,21 @@ app = Flask(__name__)
 fmt = '%Y-%m-%d %H:%M:%S'  # for datetime calculations
 
 
+@app.route("/")
+def hello_world():
+    return "<p>Hello, World!</p>"
+
+
 @app.route("/login-client", methods=["POST"])
 def login_client():
     id = request.form["id"]
     password = request.form["password"]
-    actions = request.form["actions"]
-    actions = Actions
-    user = User(id, password, actions)
+    print(id)
+    print(request)
+    # actions = request.form["actions"]
+    # print("actions", actions)
+    # actions = Actions
+    user = User(id, password)
 
     if id not in users:
         try:
