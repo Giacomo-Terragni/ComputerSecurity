@@ -7,12 +7,12 @@ app = Flask(__name__)
 fmt = '%Y-%m-%d %H:%M:%S'  # for datetime calculations
 
 
-# TODO: check id is valid (string)
 @app.route("/login-client", methods=["POST"])
 def login_client():
     id = request.form["id"]
     password = request.form["password"]
-    actions = Actions() #TODO come back to this based on response from email, most likely we will delete it
+    actions = request.form["actions"]
+    actions = Actions
     user = User(id, password, actions)
 
     if id not in users:
@@ -23,11 +23,10 @@ def login_client():
         print(users)
         return make_response({"result": "success"}, 200)
     else:
-        # TODO: check password if it is the same then handle same user in different devices, if it is not then error
+        # TODO: check password -> GIACO,  ELE
         return make_response({"result": "fail"}, 400)
 
 
-# TODO: log in file counter of the client logging out
 @app.route("/logout-client", methods=["DELETE"])
 def logout_client():
     id = request.form["id"]
@@ -44,7 +43,7 @@ def increase_counter():
     id = request.form["id"]
     amount = int(request.form["amount"])
     try:
-        #TODO: check that this type of amount input  is correct
+        #TODO: check that this type of amount input  is correct -> CHIARA
         users[id].counter += amount
     except Exception as ex:
         return make_response({"error": f"unable to increase counter {str(ex)}"}, 400)
@@ -57,7 +56,7 @@ def decrease_counter():
     id = request.form["id"]
     amount = int(request.form["amount"])
     try:
-        #TODO: check that this type of amount input  is correct
+        #TODO: check that this type of amount input  is correct -> CHIARA
         users[id].counter -= amount
     except Exception as ex:
         return make_response({"error": f"unable to decrease counter {str(ex)}"}, 400)

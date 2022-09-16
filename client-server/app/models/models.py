@@ -11,7 +11,7 @@ class Server:
 
 
 class Actions:
-    def __init__(self):
+    def __init__(self, delay):
         self.delay = delay
         self.steps = []
 
@@ -25,10 +25,10 @@ class Actions:
 class User:
 
     def __init__(self, id: str, password: str, actions: Actions):
-        self.id = id # TODO: maybe this could also be name or contain letters
+        self.id = id
         self.password = password
         self.counter = 0
-        self.actions = actions #TODO: probably delete this
+        self.actions = actions #TODO: probably delete this: ELENA
 
     def __repr__(self):
         return f'Client({self.id}, {self.password}, {self.counter})'
@@ -36,12 +36,11 @@ class User:
 
 
 def save_user(client: User):
-    # TODO: check if client is already logged, in case
     users[client.id] = client
 
 
-# TODO: check pop works fine
+# TODO: debugging in future
 def delete_user(user: User):
     users.pop(user.id)
 
-# TODO: hash id and password
+# TODO: hash id slides and password -> GIACOMO, ELENA

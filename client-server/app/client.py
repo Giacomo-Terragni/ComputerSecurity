@@ -59,7 +59,7 @@ def decrease_counter(id, amount):
     print(response.json())
     return response
 
-
+#TODO> send email -> ERIC
 def run_gui():
     while True:
         login_answers = prompt(login_questions)
@@ -87,10 +87,10 @@ def run_gui():
         answer = final_answers["choice"]
         if answer == "Quit":
             break
-            # TODO: output txt file with counters of all clients
 
-        # TODO: method to update txt file with every change in counter of every client
 
+#TODO: handle exceptions -> Meli
+# TODO: output txt file with counters of all clients -> ERIC
 
 if __name__ == "__main__":
     # source: https://www.geeksforgeeks.org/read-json-file-using-python/
@@ -110,11 +110,10 @@ if __name__ == "__main__":
     for step in data["actions"]["steps"]:
         if "INCREASE" in step:
             new_casted_amount = step.replace("INCREASE ", "")
-            # TODO: check that value is positive, not decimal, etc.
             increase_counter(user_id, int(new_casted_amount))
+            # TODO: update log file: ERIC
         if "DECREASE" in step:
             new_casted_amount = step.replace("DECREASE ", "")
-            # TODO: check that value is positive, not decimal, etc.
             decrease_counter(user_id, int(new_casted_amount))
         time.sleep(delay)
 
