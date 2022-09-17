@@ -7,17 +7,11 @@ app = Flask(__name__)
 fmt = '%Y-%m-%d %H:%M:%S'  # for datetime calculations
 
 
-@app.route("/")
-def hello_world():
-    return "<p>Hello, World!</p>"
-
-
 @app.route("/login-client", methods=["POST"])
 def login_client():
     id = request.form["id"]
     password = request.form["password"]
     print(id)
-    print(request)
     # actions = request.form["actions"]
     # print("actions", actions)
     # actions = Actions
@@ -70,3 +64,13 @@ def decrease_counter():
         return make_response({"error": f"unable to decrease counter {str(ex)}"}, 400)
     print(users)
     return make_response({"result": "success"}, 200)
+
+
+@app.route("/user/<string:user_id>")
+def get_client(user_id):
+    try:
+        user = users[user_id]
+    except KeyError:
+        return make_response({"error": f"Client with id {user_id} does not exist"}, 400)
+    return make_response({"id": user.id, "password": user.password, "counter": user.counter}, 200)
+

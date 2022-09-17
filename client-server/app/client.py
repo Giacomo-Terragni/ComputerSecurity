@@ -60,6 +60,11 @@ def decrease_counter(id, amount):
     return response
 
 
+def get_client(user_id):
+    response = requests.get(BASE_URL + "/user/" + user_id)
+    return response.json()
+
+
 def update_log(fname, user_id, action, amount):
     with open(fname, 'a+') as f:
         f.write(f'{user_id}  {action}  {amount}\n')
@@ -121,12 +126,22 @@ if __name__ == "__main__":
         if "INCREASE" in step:
             new_casted_amount = step.replace("INCREASE ", "")
             increase_counter(user_id, int(new_casted_amount))
-            # TODO: update log file: ERIC
-            update_log(logfile, user_id, "INCREASE", new_casted_amount)
+            # TODO: update log file: ERIC (DONE?)
+            client = get_client(user_id)
+            try:
+                update_log(logfile, user_id, "INCREASE", client["counter"])
+            except KeyError:
+                print("Failed updating the log file")
+
         if "DECREASE" in step:
             new_casted_amount = step.replace("DECREASE ", "")
             decrease_counter(user_id, int(new_casted_amount))
-            update_log(logfile, user_id, "DECREASE", new_casted_amount)
+            client = get_client(user_id)
+            try:
+                update_log(logfile, user_id, "DECREASE", client["counter"])
+            except KeyError:
+                print("Failed updating the log file")
+
         time.sleep(delay)
 
     f.close()
