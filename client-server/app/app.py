@@ -3,9 +3,13 @@ from models.models import *
 
 # This is the server
 app = Flask(__name__)
+FILENAME = "logs/logs.txt"
 
-fmt = '%Y-%m-%d %H:%M:%S'  # for datetime calculations
-
+# TODO: this is not being called when client is created, i thought it should ? and that it should say counter 0
+def update_log(user_id, action, amount):
+    with open(FILENAME, 'a+') as f:
+        f.write(f'{user_id}  {action}  {amount}\n')
+    f.close()
 
 @app.route("/login-client", methods=["POST"])
 def login_client():
@@ -44,6 +48,7 @@ def logout_client():
 def increase_counter():
     id = request.form["id"]
     amount = int(request.form["amount"])
+    update_log(id, "INCREASE", amount)
     try:
         #TODO: check that this type of amount input  is correct -> CHIARA
         users[id].counter += amount
@@ -57,6 +62,8 @@ def increase_counter():
 def decrease_counter():
     id = request.form["id"]
     amount = int(request.form["amount"])
+    update_log(id, "DECREASE", amount)
+
     try:
         #TODO: check that this type of amount input  is correct -> CHIARA
         users[id].counter -= amount
