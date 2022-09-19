@@ -60,11 +60,21 @@ def get_client(user_id):
     response = requests.get(BASE_URL + "/user/" + user_id)
     return response.json()
 
+
 def initialize_argparse():
     parser = argparse.ArgumentParser()
     parser.add_argument('--file')
     return vars(parser.parse_args())
 
+
+def update_log(fname, user_id, action, amount):
+    with open(fname, 'a+') as f:
+        f.write(f'{user_id}  {action}  {amount}\n')
+    f.close()
+
+
+# TODO: handle exceptions -> Meli
+# TODO: output txt file with counters of all clients -> ERIC
 # python client.py --file data.json
 if __name__ == "__main__":
     # source: https://www.geeksforgeeks.org/read-json-file-using-python/
@@ -81,7 +91,7 @@ if __name__ == "__main__":
         print(BASE_URL)
         user_id = data["id"]
         password = data["password"]
-        logfile = "./logs/server " + data["server"]["ip"] + " " + data["server"]["port"] + " log.txt"
+        # logfile = "./logs/server " + data["server"]["ip"] + " " + data["server"]["port"] + " log.txt"
         delay = int(data["actions"]["delay"])
     except KeyError:
         sys.exit("Error: Input file does not contain right input format.")
@@ -95,12 +105,20 @@ if __name__ == "__main__":
         if "INCREASE" in step:
             new_casted_amount = step.replace("INCREASE ", "")
             increase_counter(user_id, int(new_casted_amount))
-            client = get_client(user_id)
+            # client = get_client(user_id)
+            # try:
+            #     update_log(logfile, user_id, "INCREASE", client["counter"])
+            # except KeyError:
+            #     print("Failed updating the log file")
 
         if "DECREASE" in step:
             new_casted_amount = step.replace("DECREASE ", "")
             decrease_counter(user_id, int(new_casted_amount))
-            client = get_client(user_id)
+            # client = get_client(user_id)
+            # try:
+            #     update_log(logfile, user_id, "DECREASE", client["counter"])
+            # except KeyError:
+            #     print("Failed updating the log file")
 
         time.sleep(delay)
     logout_client(user_id)
