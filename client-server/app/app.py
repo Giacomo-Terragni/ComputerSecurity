@@ -20,7 +20,9 @@ def login_client():
     hash_id = hash(id)
     hash_password = hash(password)
     user = User(hash_id, hash_password)
+    # user doesnt exist
     if hash_id not in users:
+
         try:
             save_user(user)
             update_log(id, "NEW LOG IN", user.counter)  # ??
@@ -31,6 +33,7 @@ def login_client():
     else:
         for key in users:
             if users[key].password == hash_password:
+                users[key].login_counter += 1
                 return make_response({"result": "success"}, 200)
         return make_response({"result": "fail"}, 400)
 
@@ -39,10 +42,16 @@ def login_client():
 def logout_client():
     id = request.form["id"]
     try:
-        delete_user(users[id])
+        print('PAY ATTENTIONNNNNN')
+        print(users[hash(id)].login_counter)
+        if users[hash(id)].login_counter > 1:
+            print( 'here')
+            users[hash(id)].login_counter -= 1
+        else:
+            print('else')
+            delete_user(users[hash(id)])
     except Exception as ex:
         return make_response({"error": f"could not log out {str(ex)}"}, 400)
-    print(users)
     return make_response({"result": "success"}, 200)
 
 
@@ -52,8 +61,8 @@ def increase_counter():
     amount = int(request.form["amount"])
     try:
         #TODO: check that this type of amount input  is correct -> CHIARA
-        users[id].counter += amount
-        update_log(id, "INCREASE", users[id].counter)
+        users[hash(id)].counter += amount
+        update_log(id, "INCREASE", users[hash(id)].counter)
     except Exception as ex:
         return make_response({"error": f"unable to increase counter {str(ex)}"}, 400)
     print(users)
@@ -66,8 +75,8 @@ def decrease_counter():
     amount = int(request.form["amount"])
     try:
         #TODO: check that this type of amount input  is correct -> CHIARA
-        users[id].counter -= amount
-        update_log(id, "DECREASE", users[id].counter)
+        users[hash(id)].counter -= amount
+        update_log(id, "DECREASE", users[hash(id)].counter)
     except Exception as ex:
         return make_response({"error": f"unable to decrease counter {str(ex)}"}, 400)
     print(users)
