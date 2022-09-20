@@ -88,6 +88,9 @@ def decrease_counter():
         return make_response({"error": f"amount provided is negative"}, 400)
 
     try:
+        if (users[hash(id)].counter - amount) < 0:
+            return make_response({"error": f"counter cannot be negative"}, 400)
+
         users[hash(id)].counter -= amount
         update_log(id, f"DECREASE {amount}", users[hash(id)].counter)
     except Exception as ex:
