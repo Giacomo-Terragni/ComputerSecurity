@@ -43,8 +43,11 @@ def increase_counter():
     id = request.form["id"]
     amount = int(request.form["amount"])
     try:
-        #TODO: check that this type of amount input  is correct -> CHIARA
-        users[id].counter += amount
+        # check whether amount is integer
+        if amount.isinteger():
+            users[id].counter += amount
+        else:
+            return make_response({"error": f"amount not int"}, 400)
     except Exception as ex:
         return make_response({"error": f"unable to increase counter {str(ex)}"}, 400)
     print(users)
@@ -56,8 +59,12 @@ def decrease_counter():
     id = request.form["id"]
     amount = int(request.form["amount"])
     try:
-        #TODO: check that this type of amount input  is correct -> CHIARA
         users[id].counter -= amount
+        # check whether amount is integer
+        if amount.isinteger():
+            users[id].counter -= amount
+        else:
+            return make_response({"error": f"amount not int"}, 400)
     except Exception as ex:
         return make_response({"error": f"unable to decrease counter {str(ex)}"}, 400)
     print(users)
