@@ -7,9 +7,9 @@ FILENAME = "./logs/logs.txt"
 
 
 # TODO: this is not being called when client is created, i thought it should ? and that it should say counter 0
-def update_log(user_id, action, amount):
+def update_log(user_id, action, counter):
     with open(FILENAME, 'a+') as f:
-        f.write(f'{user_id}  {action}  {amount}\n')
+        f.write(f'ID: {user_id} | {action} | COUNTER: {counter}\n')
     f.close()
 
 
@@ -42,13 +42,9 @@ def login_client():
 def logout_client():
     id = request.form["id"]
     try:
-        print('PAY ATTENTIONNNNNN')
-        print(users[hash(id)].login_counter)
         if users[hash(id)].login_counter > 1:
-            print( 'here')
             users[hash(id)].login_counter -= 1
         else:
-            print('else')
             delete_user(users[hash(id)])
     except Exception as ex:
         return make_response({"error": f"could not log out {str(ex)}"}, 400)
@@ -64,13 +60,12 @@ def increase_counter():
         return make_response({"error": f"amount provided is not an integer"}, 400)
 
     amount = int(amount)
-
     if amount < 0:
         return make_response({"error": f"amount provided is negative"}, 400)
 
     try:
         users[hash(id)].counter += amount
-        update_log(id, "INCREASE", users[hash(id)].counter)
+        update_log(id, f"INCREASE {amount}", users[hash(id)].counter)
     except Exception as ex:
         return make_response({"error": f"unable to increase counter {str(ex)}"}, 400)
     print(users)
@@ -86,13 +81,12 @@ def decrease_counter():
         return make_response({"error": f"amount provided is not an integer"}, 400)
 
     amount = int(amount)
-
     if amount < 0:
         return make_response({"error": f"amount provided is negative"}, 400)
 
     try:
         users[hash(id)].counter -= amount
-        update_log(id, "DECREASE", users[hash(id)].counter)
+        update_log(id, f"DECREASE {amount}", users[hash(id)].counter)
     except Exception as ex:
         return make_response({"error": f"unable to decrease counter {str(ex)}"}, 400)
     print(users)
