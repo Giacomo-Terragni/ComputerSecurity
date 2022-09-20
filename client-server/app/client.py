@@ -107,8 +107,6 @@ if __name__ == "__main__":
     if result['result'] == 'fail':
         sys.exit('Error: Invalid combination of password and user ID.')
 
-    # TODO: check that first action is not decrease , that would give negative numbers
-    # TODO: ask chiara if shes checking for result of crease > 0 .
     # loop throw actions
     for step in data["actions"]["steps"]:
         if "INCREASE" in step:
