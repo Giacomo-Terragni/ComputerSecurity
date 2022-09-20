@@ -1,11 +1,11 @@
-# ComputerSecurity-
-Eric Banzuzi, Rosamelia Carioni, Chiara , Elena ,  Giacomo
+# Computer Security
+Eric Banzuzi, Rosamelia Carioni, Chiara Paglioni , Elena Perego,  Giacomo Terragni
 
 ## Requirements
-Python 3 with:
+Python 3 with packages:
 - requests
 - flask
-- 
+
 
 ## 1.Flask
 Make sure your terminal is at the same location as app.py. 
