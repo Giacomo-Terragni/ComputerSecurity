@@ -4,9 +4,10 @@ from models.models import *
 # This is the server
 app = Flask(__name__)
 FILENAME = "./logs/logs.txt"
+private_key = generate_private_key()
+public_key = generate_public_key()
 
 
-# TODO: this is not being called when client is created, i thought it should ? and that it should say counter 0
 def update_log(user_id, action, counter):
     with open(FILENAME, 'a+') as f:
         f.write(f'ID: {user_id} | {action} | COUNTER: {counter}\n')
@@ -17,12 +18,13 @@ def update_log(user_id, action, counter):
 def login_client():
     id = request.form["id"]
     password = request.form["password"]
+    # TODO: decrypt data using private key (Giaco)
+    # TODO: check for injections in id and password (Giaco)
     hash_id = hash(id)
     hash_password = hash(password)
     user = User(hash_id, hash_password)
     # user doesnt exist
     if hash_id not in users:
-
         try:
             save_user(user)
             update_log(id, "NEW LOG IN", user.counter)  # ??
@@ -42,6 +44,7 @@ def login_client():
 @app.route("/logout-client", methods=["DELETE"])
 def logout_client():
     id = request.form["id"]
+    # TODO: decrypt data using private key (Giaco)
     try:
         if users[hash(id)].login_counter > 1:
             users[hash(id)].login_counter -= 1
@@ -56,7 +59,7 @@ def logout_client():
 def increase_counter():
     id = request.form["id"]
     amount = request.form["amount"]
-
+    # TODO: decrypt data using private key (Giaco)
     try:
         amount = int(amount)
     except ValueError:
@@ -78,7 +81,7 @@ def increase_counter():
 def decrease_counter():
     id = request.form["id"]
     amount = request.form["amount"]
-
+    # TODO: decrypt data using private key (Giaco)
     try:
         amount = int(amount)
     except ValueError:
@@ -94,3 +97,8 @@ def decrease_counter():
         return make_response({"error": f"unable to decrease counter {str(ex)}"}, 400)
     print(users)
     return make_response({"result": "success"}, 200)
+
+
+@app.route("/public-key", methods=["GET"])
+def get_public_key():
+    return public_key

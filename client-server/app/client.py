@@ -4,6 +4,7 @@ import time
 import sys
 import argparse
 
+
 # This class should not use models so that client-server structure is separated
 
 BASE_URL = ""
@@ -33,31 +34,39 @@ amount_questions = [
 
 
 def login_client(id, password):
+    public_key = get_public_key()
+    # TODO: encrypt data using public (Giaco)
     response = requests.post(BASE_URL + "/login-client", data={"id": id, "password": password})
     print(response.json())
     return response.json()
 
 
 def logout_client(id):
+    public_key = get_public_key()
+    # TODO: encrypt data using public (Giaco)
     response = requests.delete(BASE_URL + "/logout-client", data={"id": id})
     print(response.json())
     return response
 
 
 def increase_counter(id, amount):
+    public_key = get_public_key()
+    # TODO: encrypt data using public (Giaco)
     response = requests.post(BASE_URL + "/increase-counter", data={"id": id, "amount": amount})
     print(response.json())
     return response
 
 
 def decrease_counter(id, amount):
+    public_key = get_public_key()
+    # TODO: encrypt data using public (Giaco)
     response = requests.post(BASE_URL + "/decrease-counter", data={"id": id, "amount": amount})
     print(response.json())
     return response
 
 
-def get_client(user_id):
-    response = requests.get(BASE_URL + "/user/" + user_id)
+def get_public_key():
+    response = requests.get(BASE_URL + "/public-key/")
     return response.json()
 
 
@@ -113,3 +122,4 @@ if __name__ == "__main__":
         time.sleep(delay)
     logout_client(user_id)
     file.close()
+

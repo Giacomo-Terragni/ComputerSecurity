@@ -4,6 +4,7 @@ users = {}
 delay = 0
 
 
+
 class User:
 
     def __init__(self, id: str, password: str):
@@ -29,3 +30,15 @@ def delete_user(user: User):
 def hash(input: str):
     hashed_input = hashlib.sha256(input.encode('utf-8')).hexdigest()
     return hashed_input
+
+
+# TODO: method to generate private key (Giaco)
+def generate_private_key():
+    private_key = None
+    return private_key
+
+
+# TODO: method to generate public and private key (Giaco)
+def generate_public_key():
+    public_key = None
+    return public_key
