@@ -34,6 +34,7 @@ def login_client():
         for key in users:
             if users[key].password == hash_password:
                 users[key].login_counter += 1
+                update_log(id, "NEW LOG IN", users[key].counter)
                 return make_response({"result": "success"}, 200)
         return make_response({"result": "fail"}, 400)
 
