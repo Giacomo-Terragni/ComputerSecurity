@@ -33,7 +33,6 @@ class User:
         return f'Client({self.id}, {self.password}, {self.counter})'
 
 
-
 def save_user(client: User):
     users[client.id] = client
 
