@@ -79,7 +79,7 @@ if __name__ == "__main__":
     # Opening JSON file
     try:
         args = initialize_argparse()
-        file = open(args['file'])
+        file = open('./data/'+args['file'])
         data = json.load(file)
     except Exception:
         sys.exit("Error: Invalid JSON file provided.")
