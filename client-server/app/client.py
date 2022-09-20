@@ -104,11 +104,11 @@ if __name__ == "__main__":
     for step in data["actions"]["steps"]:
         if "INCREASE" in step:
             new_casted_amount = step.replace("INCREASE ", "")
-            increase_counter(user_id, int(new_casted_amount))
+            increase_counter(user_id, new_casted_amount)
 
         if "DECREASE" in step:
             new_casted_amount = step.replace("DECREASE ", "")
-            decrease_counter(user_id, int(new_casted_amount))
+            decrease_counter(user_id, new_casted_amount)
 
         time.sleep(delay)
     logout_client(user_id)

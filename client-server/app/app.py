@@ -58,9 +58,17 @@ def logout_client():
 @app.route("/increase-counter", methods=["POST"])
 def increase_counter():
     id = request.form["id"]
-    amount = int(request.form["amount"])
+    amount = request.form["amount"]
+
+    if not isinstance(amount, int):
+        return make_response({"error": f"amount provided is not an integer"}, 400)
+
+    amount = int(amount)
+
+    if amount < 0:
+        return make_response({"error": f"amount provided is negative"}, 400)
+
     try:
-        #TODO: check that this type of amount input  is correct -> CHIARA
         users[hash(id)].counter += amount
         update_log(id, "INCREASE", users[hash(id)].counter)
     except Exception as ex:
@@ -72,9 +80,17 @@ def increase_counter():
 @app.route("/decrease-counter", methods=["POST"])
 def decrease_counter():
     id = request.form["id"]
-    amount = int(request.form["amount"])
+    amount = request.form["amount"]
+
+    if not isinstance(amount, int):
+        return make_response({"error": f"amount provided is not an integer"}, 400)
+
+    amount = int(amount)
+
+    if amount < 0:
+        return make_response({"error": f"amount provided is negative"}, 400)
+
     try:
-        #TODO: check that this type of amount input  is correct -> CHIARA
         users[hash(id)].counter -= amount
         update_log(id, "DECREASE", users[hash(id)].counter)
     except Exception as ex:

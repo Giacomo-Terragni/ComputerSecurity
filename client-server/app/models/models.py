@@ -20,9 +20,9 @@ def save_user(client: User):
     users[client.id] = client
 
 
-# TODO: debugging in future
 def delete_user(user: User):
     users.pop(user.id)
+
 
 # TODO: add salt, pepper and private keys and public key
 # TODO: how to compare 2 hashs id of the same user
