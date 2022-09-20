@@ -17,13 +17,10 @@ def update_log(user_id, action, amount):
 def login_client():
     id = request.form["id"]
     password = request.form["password"]
-    print(id)
-    # actions = request.form["actions"]
-    # print("actions", actions)
-    # actions = Actions
-    user = User(id, password)
-
-    if id not in users:
+    hash_id = hash(id)
+    hash_password = hash(password)
+    user = User(hash_id, hash_password)
+    if hash_id not in users:
         try:
             save_user(user)
             update_log(id, "NEW LOG IN", user.counter)  # ??
@@ -32,7 +29,9 @@ def login_client():
         print(users)
         return make_response({"result": "success"}, 200)
     else:
-        # TODO: check password -> GIACO,  ELE
+        for key in users:
+            if users[key].password == hash_password:
+                return make_response({"result": "success"}, 200)
         return make_response({"result": "fail"}, 400)
 
 
@@ -65,7 +64,6 @@ def increase_counter():
 def decrease_counter():
     id = request.form["id"]
     amount = int(request.form["amount"])
-
     try:
         #TODO: check that this type of amount input  is correct -> CHIARA
         users[id].counter -= amount
@@ -74,13 +72,3 @@ def decrease_counter():
         return make_response({"error": f"unable to decrease counter {str(ex)}"}, 400)
     print(users)
     return make_response({"result": "success"}, 200)
-
-
-@app.route("/user/<string:user_id>")
-def get_client(user_id):
-    try:
-        user = users[user_id]
-    except KeyError:
-        return make_response({"error": f"Client with id {user_id} does not exist"}, 400)
-    return make_response({"id": user.id, "counter": user.counter}, 200)
-
