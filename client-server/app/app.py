@@ -57,10 +57,11 @@ def increase_counter():
     id = request.form["id"]
     amount = request.form["amount"]
 
-    if not isinstance(amount, int):
+    try:
+        amount = int(amount)
+    except ValueError:
         return make_response({"error": f"amount provided is not an integer"}, 400)
 
-    amount = int(amount)
     if amount < 0:
         return make_response({"error": f"amount provided is negative"}, 400)
 
@@ -78,10 +79,11 @@ def decrease_counter():
     id = request.form["id"]
     amount = request.form["amount"]
 
-    if not isinstance(amount, int):
+    try:
+        amount = int(amount)
+    except ValueError:
         return make_response({"error": f"amount provided is not an integer"}, 400)
 
-    amount = int(amount)
     if amount < 0:
         return make_response({"error": f"amount provided is negative"}, 400)
 
