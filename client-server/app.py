@@ -3,7 +3,7 @@ from models.models import *
 
 # This is the server
 app = Flask(__name__)
-FILENAME = "./logs/logs.txt"
+FILENAME = "logs/logs.txt"
 private_key = generate_private_key()
 public_key = generate_public_key()
 
