@@ -1,11 +1,24 @@
-from flask import Flask, request, make_response
+from flask import Flask, request, make_response, jsonify
 from models.models import *
 
 # This is the server
 app = Flask(__name__)
 FILENAME = "./logs/logs.txt"
-private_key = generate_private_key()
-public_key = generate_public_key()
+generate_key_files()
+private_key = get_private_key()
+public_key = get_public_key()
+
+
+def decrypt_message(message):
+    decrypted_message = private_key.decrypt(
+        message,
+        padding.OAEP(
+            mgf=padding.MGF1(algorithm=hashes.SHA256()),
+            algorithm=hashes.SHA256(),
+            label=None
+        )
+    )
+    return decrypted_message.decode("utf-8")
 
 
 def update_log(user_id, action, counter):
@@ -16,9 +29,8 @@ def update_log(user_id, action, counter):
 
 @app.route("/login-client", methods=["POST"])
 def login_client():
-    id = request.form["id"]
-    password = request.form["password"]
-    # TODO: decrypt data using private key (Giaco)
+    id = decrypt_message(request.form["id"])
+    password = decrypt_message(request.form["password"])
     # TODO: check for injections in id and password (Giaco)
     hash_id = hash(id)
     hash_password = hash(password)
@@ -43,8 +55,7 @@ def login_client():
 
 @app.route("/logout-client", methods=["DELETE"])
 def logout_client():
-    id = request.form["id"]
-    # TODO: decrypt data using private key (Giaco)
+    id = decrypt_message(request.form["id"])
     try:
         if users[hash(id)].login_counter > 1:
             users[hash(id)].login_counter -= 1
@@ -57,9 +68,8 @@ def logout_client():
 
 @app.route("/increase-counter", methods=["POST"])
 def increase_counter():
-    id = request.form["id"]
-    amount = request.form["amount"]
-    # TODO: decrypt data using private key (Giaco)
+    id = decrypt_message(request.form["id"])
+    amount = decrypt_message(request.form["amount"])
     try:
         amount = int(amount)
     except ValueError:
@@ -81,7 +91,9 @@ def increase_counter():
 def decrease_counter():
     id = request.form["id"]
     amount = request.form["amount"]
-    # TODO: decrypt data using private key (Giaco)
+    # TODO: decrypt data using private key (Giaco)-->check
+    id = decrypt_message(id)
+    amount = decrypt_message(amount)
     try:
         amount = int(amount)
     except ValueError:
