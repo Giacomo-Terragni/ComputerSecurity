@@ -105,3 +105,6 @@ def decrease_counter():
 @app.route("/public-key", methods=["GET"])
 def get_public_key():
     return public_key
+
+if __name__ == '__main__':
+    app.run()
