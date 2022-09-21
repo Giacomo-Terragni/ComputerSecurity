@@ -116,4 +116,7 @@ def decrease_counter():
 
 @app.route("/public-key", methods=["GET"])
 def get_public_key():
-    return public_key
+    return public_key.public_bytes(
+        encoding=serialization.Encoding.PEM,
+        format=serialization.PublicFormat.SubjectPublicKeyInfo
+    )
