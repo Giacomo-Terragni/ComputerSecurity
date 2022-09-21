@@ -76,12 +76,6 @@ def initialize_argparse():
     return vars(parser.parse_args())
 
 
-def update_log(fname, user_id, action, amount):
-    with open(fname, 'a+') as f:
-        f.write(f'{user_id}  {action}  {amount}\n')
-    f.close()
-
-
 # python client.py --file data.json
 if __name__ == "__main__":
     # source: https://www.geeksforgeeks.org/read-json-file-using-python/
@@ -98,7 +92,6 @@ if __name__ == "__main__":
         print(BASE_URL)
         user_id = data["id"]
         password = data["password"]
-        # logfile = "./logs/server " + data["server"]["ip"] + " " + data["server"]["port"] + " log.txt"
         delay = int(data["actions"]["delay"])
     except KeyError:
         sys.exit("Error: Input file does not contain right input format.")

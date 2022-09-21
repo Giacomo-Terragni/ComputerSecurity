@@ -4,7 +4,6 @@ users = {}
 delay = 0
 
 
-
 class User:
 
     def __init__(self, id: str, password: str):
