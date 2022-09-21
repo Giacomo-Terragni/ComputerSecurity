@@ -1,11 +1,14 @@
 # Computer Security
 Eric Banzuzi, Rosamelia Carioni, Chiara Paglioni , Elena Perego,  Giacomo Terragni
 
+## UML Diagram
+
+![alt text](resources/ComputerSecurity.png)
+
 ## Requirements
 Python 3 with packages:
 - requests
 - flask
-
 
 ## 1.Flask
 Make sure your terminal is at the same location as app.py. 
