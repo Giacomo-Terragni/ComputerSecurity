@@ -12,6 +12,11 @@ def update_log(user_id, action, counter):
     with open(FILENAME, 'a+') as f:
         f.write(f'ID: {user_id} | {action} | COUNTER: {counter}\n')
     f.close()
+    
+ 
+@app.route("/", methods=["GET"])
+def hello():
+    return "hello"
 
 
 @app.route("/login-client", methods=["POST"])
