@@ -5,6 +5,7 @@ import json
 import time
 import sys
 import argparse
+from gui import visual
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.asymmetric import rsa
 from cryptography.hazmat.primitives import serialization
@@ -105,7 +106,7 @@ if __name__ == "__main__":
     # Opening JSON file
     try:
         args = initialize_argparse()
-        file = open('./data/' + args['file'])
+        file = open(visual.open_file())
         data = json.load(file)
     except Exception:
         sys.exit("Error: Invalid JSON file provided.")
