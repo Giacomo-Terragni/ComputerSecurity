@@ -104,9 +104,13 @@ def initialize_argparse():
 if __name__ == "__main__":
     # source: https://www.geeksforgeeks.org/read-json-file-using-python/
     # Opening JSON file
+    visual.setup_gui()
+
     try:
         args = initialize_argparse()
-        file = open(visual.open_file())
+        # file = open(visual.open_file())
+        path = visual.filenames.pop()
+        file = open(path)
         data = json.load(file)
     except Exception:
         sys.exit("Error: Invalid JSON file provided.")
