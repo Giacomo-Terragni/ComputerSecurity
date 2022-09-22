@@ -1,14 +1,17 @@
 # Computer Security
 Eric Banzuzi, Rosamelia Carioni, Chiara Paglioni , Elena Perego,  Giacomo Terragni
 
+## UML Diagram
+
+![alt text](resources/ComputerSecurity.png)
+
 ## Requirements
 Python 3 with packages:
 - requests
 - flask
 
-
-## 1.Flask
-Make sure your terminal is at the same location as app.py. 
+## 1. Flask
+Make sure your terminal is at the same location as **app.py**. 
 Initialize a server by typing:
 `flask run`
 
@@ -42,11 +45,11 @@ The clients should be in the following format:
 }
 ```
 
-Open a new terminal in the same location as client.py and read the data by typing:
+Open a new terminal in the same location as **client.py** and read the data by typing:
 
 `python client.py --file "filename"`
 
-## 3.Responses
+## 3. Responses
 If everything went well, you should see this in the terminal where the client was read:
 
 ![alt text](resources/Image%2020-09-2022%20at%2019.13.jpg)
