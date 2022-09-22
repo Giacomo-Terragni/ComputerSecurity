@@ -6,9 +6,8 @@ from models.models import *
 # This is the server
 app = Flask(__name__)
 FILENAME = "./logs/logs.txt"
-generate_key_files()
 private_key = get_private_key()
-public_key = get_public_key()
+public_key = get_public_key(private_key)
 
 
 def decrypt_message(message):

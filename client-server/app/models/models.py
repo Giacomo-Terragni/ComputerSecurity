@@ -36,48 +36,17 @@ def hash(input: str):
     return hashed_input
 
 
-# TODO: method to generate private key (Giaco)--> check
-def generate_key_files():
-    # generating public/private
+def get_public_key(private_key):
+    public_key = private_key.public_key()
+    return public_key
+
+
+def get_private_key():
     private_key = rsa.generate_private_key(
         public_exponent=65537,
         key_size=2048,
         backend=default_backend()
     )
-    public_key = private_key.public_key()
-    # Storing private Keys
-    pem = private_key.private_bytes(
-        encoding=serialization.Encoding.PEM,
-        format=serialization.PrivateFormat.PKCS8,
-        encryption_algorithm=serialization.NoEncryption()
-    )
-    with open('private_key.pem', 'wb') as f:
-        f.write(pem)
-    # storing public
-    pem = public_key.public_bytes(
-        encoding=serialization.Encoding.PEM,
-        format=serialization.PublicFormat.SubjectPublicKeyInfo
-    )
-    with open('public_key.pem', 'wb') as f:
-        f.write(pem)
-
-
-def get_public_key():
-    with open("public_key.pem", "rb") as key_file:
-        public_key = serialization.load_pem_public_key(
-            key_file.read(),
-            backend=default_backend()
-        )
-    return public_key
-
-
-def get_private_key():
-    with open("private_key.pem", "rb") as key_file:
-        private_key = serialization.load_pem_private_key(
-            key_file.read(),
-            password=None,
-            backend=default_backend()
-        )
     return private_key
 
 
