@@ -1,3 +1,5 @@
+import base64
+
 from flask import Flask, request, make_response, jsonify
 from models.models import *
 
@@ -29,9 +31,8 @@ def update_log(user_id, action, counter):
 
 @app.route("/login-client", methods=["POST"])
 def login_client():
-    id = decrypt_message(request.form["id"])
-    password = decrypt_message(request.form["password"])
-    # TODO: check for injections in id and password (Giaco)
+    id = decrypt_message(base64.b64decode(request.form["id"]))
+    password = decrypt_message(base64.b64decode(request.form["password"]))
     hash_id = hash(id)
     hash_password = hash(password)
     user = User(hash_id, hash_password)
@@ -55,7 +56,7 @@ def login_client():
 
 @app.route("/logout-client", methods=["DELETE"])
 def logout_client():
-    id = decrypt_message(request.form["id"])
+    id = decrypt_message(base64.b64decode(request.form["id"]))
     try:
         if users[hash(id)].login_counter > 1:
             users[hash(id)].login_counter -= 1
@@ -68,8 +69,8 @@ def logout_client():
 
 @app.route("/increase-counter", methods=["POST"])
 def increase_counter():
-    id = decrypt_message(request.form["id"])
-    amount = decrypt_message(request.form["amount"])
+    id = decrypt_message(base64.b64decode(request.form["id"]))
+    amount = decrypt_message(base64.b64decode(request.form["amount"]))
     try:
         amount = int(amount)
     except ValueError:
@@ -89,11 +90,8 @@ def increase_counter():
 
 @app.route("/decrease-counter", methods=["POST"])
 def decrease_counter():
-    id = request.form["id"]
-    amount = request.form["amount"]
-    # TODO: decrypt data using private key (Giaco)-->check
-    id = decrypt_message(id)
-    amount = decrypt_message(amount)
+    id = decrypt_message(base64.b64decode(request.form["id"]))
+    amount = decrypt_message(base64.b64decode(request.form["amount"]))
     try:
         amount = int(amount)
     except ValueError:
@@ -116,7 +114,7 @@ def decrease_counter():
 
 @app.route("/public-key", methods=["GET"])
 def get_public_key():
-    return public_key.public_bytes(
+    return make_response(public_key.public_bytes(
         encoding=serialization.Encoding.PEM,
         format=serialization.PublicFormat.SubjectPublicKeyInfo
-    )
+    ))

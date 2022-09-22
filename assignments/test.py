@@ -8,6 +8,9 @@ import os
 from OpenSSL import crypto
 
 #getting
+from cryptography.hazmat.primitives.serialization import load_pem_public_key
+from flask import make_response
+
 private_key = rsa.generate_private_key(
     public_exponent=65537,
     key_size=2048,
@@ -15,40 +18,6 @@ private_key = rsa.generate_private_key(
 )
 public_key = private_key.public_key()
 
-#Storing private Keys
-pem = private_key.private_bytes(
-    encoding=serialization.Encoding.PEM,
-    format=serialization.PrivateFormat.PKCS8,
-    encryption_algorithm=serialization.NoEncryption()
-)
-with open('private_key.pem', 'wb') as f:
-    f.write(pem)
-
-#storing public
-pem = public_key.public_bytes(
-    encoding=serialization.Encoding.PEM,
-    format=serialization.PublicFormat.SubjectPublicKeyInfo
-)
-
-with open('public_key.pem', 'wb') as f:
-    f.write(pem)
-
-#reading private
-with open("private_key.pem", "rb") as key_file:
-    private_key = serialization.load_pem_private_key(
-        key_file.read(),
-        password=None,
-        backend=default_backend()
-    )
-
-#reading public
-with open("public_key.pem", "rb") as key_file:
-    public_key = serialization.load_pem_public_key(
-        key_file.read(),
-        backend=default_backend()
-    )
-
-print(public_key)
 
 #encripting
 message = str.encode('terra')
@@ -62,7 +31,8 @@ encrypted = public_key.encrypt(
     )
 )
 
-
+print(len(encrypted))
+print(private_key.key_size)
 #decrypting
 
 original_message = private_key.decrypt(
@@ -75,11 +45,7 @@ original_message = private_key.decrypt(
 )
 original_message
 original_message.decode("utf-8")
+print(original_message)
 ###
 
 
-#cert is the encrypted certificate int this format -----BEGIN -----END
-crtObj = crypto.load_certificate(crypto.FILETYPE_PEM, pem)
-pubKeyObject = crtObj.get_pubkey()
-pubKeyString = crypto.dump_publickey(crypto.FILETYPE_PEM,pubKeyObject)
-print(pubKeyString)
