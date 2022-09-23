@@ -1,14 +1,15 @@
 # Computer Security
-Eric Banzuzi, Rosamelia Carioni, Chiara Paglioni , Elena Perego,  Giacomo Terragni
+Eric Banzuzi, Rosamelia Carioni, Chiara Paglioni, Elena Perego, Giacomo Terragni
 
 ## UML Diagram
 
 ![alt text](resources/ComputerSecurity.png)
 
 ## Requirements
-Python 3 with packages:
+Python 3 with these packages:
 - requests
 - flask
+- cryptography
 
 ## 1. Flask
 Make sure your terminal is at the same location as **app.py**. 
@@ -68,10 +69,10 @@ You should see the following output:
 ![alt text](resources/Image%2020-09-2022%20at%2019.18.jpg)
 
 ## 4. Log file
-All outputs from the actions executed on the clients counter are stored in a log file in app/logs/logs.txt. 
+All outputs from the actions executed on the clients counter are stored in a log file in *app/logs/logs.txt*. 
 If you wish to store the data in a different file, change the value of variable **FILENAME** in app.py to the new file's name.
 
-The information is in the following format:
+The file information is in the following format:
 ```
 ID: 100 | NEW LOG IN | COUNTER: 0
 ID: 100 | INCREASE 10 | COUNTER: 10

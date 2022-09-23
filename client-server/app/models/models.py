@@ -1,16 +1,12 @@
 import hashlib
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.asymmetric import rsa
-from cryptography.hazmat.primitives import serialization
-from cryptography.hazmat.primitives.asymmetric import padding
-from cryptography.hazmat.primitives import hashes
 
 users = {}
 delay = 0
 
 
 class User:
-
     def __init__(self, id: str, password: str):
         self.id = id
         self.password = password
@@ -29,8 +25,6 @@ def delete_user(user: User):
     users.pop(user.id)
 
 
-# TODO: add salt, pepper and private keys and public key
-# TODO: how to compare 2 hashs id of the same user
 def hash(input: str):
     hashed_input = hashlib.sha256(input.encode('utf-8')).hexdigest()
     return hashed_input

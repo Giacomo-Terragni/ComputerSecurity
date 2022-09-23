@@ -1,7 +1,10 @@
 import base64
 
-from flask import Flask, request, make_response, jsonify
+from flask import Flask, request, make_response
 from models.models import *
+from cryptography.hazmat.primitives import serialization
+from cryptography.hazmat.primitives.asymmetric import padding
+from cryptography.hazmat.primitives import hashes
 
 # This is the server
 app = Flask(__name__)
@@ -39,10 +42,9 @@ def login_client():
     if hash_id not in users:
         try:
             save_user(user)
-            update_log(id, "NEW LOG IN", user.counter)  # ??
+            update_log(id, "NEW LOG IN", user.counter)
         except Exception as ex:
             return make_response({"error": f"could not log in {str(ex)}"}, 400)
-        print(users)
         return make_response({"result": "success"}, 200)
     else:
         for key in users:
@@ -83,7 +85,6 @@ def increase_counter():
         update_log(id, f"INCREASE {amount}", users[hash(id)].counter)
     except Exception as ex:
         return make_response({"error": f"unable to increase counter {str(ex)}"}, 400)
-    print(users)
     return make_response({"result": "success"}, 200)
 
 
@@ -107,7 +108,6 @@ def decrease_counter():
         update_log(id, f"DECREASE {amount}", users[hash(id)].counter)
     except Exception as ex:
         return make_response({"error": f"unable to decrease counter {str(ex)}"}, 400)
-    print(users)
     return make_response({"result": "success"}, 200)
 
 
