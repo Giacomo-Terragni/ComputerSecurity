@@ -20,9 +20,16 @@ You should be able to see the following in your  terminal:
 ![alt text](resources/Image%2020-09-2022%20at%2019.12.jpg)
 
 ## 2. Clients
-Put all the json files (data) you  want to read in the folder named **data**.
+Open a new terminal in the same location as **client.py** and start the program by typing:
 
-The clients should be in the following format:
+`python client.py`
+
+The following window will open up:
+
+![alt text](resources/gui.png)
+
+Upload the *.json* file that you want to read by pressing the **Open File** button. 
+Make sure the file is in the following format:
 
 ```
 {"id": "100",
@@ -44,10 +51,6 @@ The clients should be in the following format:
 }
 }
 ```
-
-Open a new terminal in the same location as **client.py** and read the data by typing:
-
-`python client.py --file "filename"`
 
 ## 3. Responses
 If everything went well, you should see this in the terminal where the client was read:

@@ -1,11 +1,25 @@
-from flask import Flask, request, make_response
+import base64
+
+from flask import Flask, request, make_response, jsonify
 from models.models import *
 
 # This is the server
 app = Flask(__name__)
 FILENAME = "./logs/logs.txt"
-private_key = generate_private_key()
-public_key = generate_public_key()
+private_key = get_private_key()
+public_key = get_public_key(private_key)
+
+
+def decrypt_message(message):
+    decrypted_message = private_key.decrypt(
+        message,
+        padding.OAEP(
+            mgf=padding.MGF1(algorithm=hashes.SHA256()),
+            algorithm=hashes.SHA256(),
+            label=None
+        )
+    )
+    return decrypted_message.decode("utf-8")
 
 
 def update_log(user_id, action, counter):
@@ -16,10 +30,8 @@ def update_log(user_id, action, counter):
 
 @app.route("/login-client", methods=["POST"])
 def login_client():
-    id = request.form["id"]
-    password = request.form["password"]
-    # TODO: decrypt data using private key (Giaco)
-    # TODO: check for injections in id and password (Giaco)
+    id = decrypt_message(base64.b64decode(request.form["id"]))
+    password = decrypt_message(base64.b64decode(request.form["password"]))
     hash_id = hash(id)
     hash_password = hash(password)
     user = User(hash_id, hash_password)
@@ -43,8 +55,7 @@ def login_client():
 
 @app.route("/logout-client", methods=["DELETE"])
 def logout_client():
-    id = request.form["id"]
-    # TODO: decrypt data using private key (Giaco)
+    id = decrypt_message(base64.b64decode(request.form["id"]))
     try:
         if users[hash(id)].login_counter > 1:
             users[hash(id)].login_counter -= 1
@@ -57,9 +68,8 @@ def logout_client():
 
 @app.route("/increase-counter", methods=["POST"])
 def increase_counter():
-    id = request.form["id"]
-    amount = request.form["amount"]
-    # TODO: decrypt data using private key (Giaco)
+    id = decrypt_message(base64.b64decode(request.form["id"]))
+    amount = decrypt_message(base64.b64decode(request.form["amount"]))
     try:
         amount = int(amount)
     except ValueError:
@@ -79,9 +89,8 @@ def increase_counter():
 
 @app.route("/decrease-counter", methods=["POST"])
 def decrease_counter():
-    id = request.form["id"]
-    amount = request.form["amount"]
-    # TODO: decrypt data using private key (Giaco)
+    id = decrypt_message(base64.b64decode(request.form["id"]))
+    amount = decrypt_message(base64.b64decode(request.form["amount"]))
     try:
         amount = int(amount)
     except ValueError:
@@ -104,4 +113,7 @@ def decrease_counter():
 
 @app.route("/public-key", methods=["GET"])
 def get_public_key():
-    return public_key
+    return make_response(public_key.public_bytes(
+        encoding=serialization.Encoding.PEM,
+        format=serialization.PublicFormat.SubjectPublicKeyInfo
+    ))

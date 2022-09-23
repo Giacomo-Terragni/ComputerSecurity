@@ -1,11 +1,19 @@
+import base64
+
 import requests
 import json
 import time
 import sys
 import argparse
-
+from gui import visual
+from cryptography.hazmat.backends import default_backend
+from cryptography.hazmat.primitives.asymmetric import rsa
+from cryptography.hazmat.primitives import serialization
+from cryptography.hazmat.primitives.asymmetric import padding
+from cryptography.hazmat.primitives import hashes
 
 # This class should not use models so that client-server structure is separated
+from cryptography.hazmat.primitives.serialization import load_pem_public_key
 
 BASE_URL = ""
 
@@ -33,41 +41,57 @@ amount_questions = [
 ]
 
 
-def login_client(id, password):
+def encrypt_message(message):
     public_key = get_public_key()
-    # TODO: encrypt data using public (Giaco)
-    response = requests.post(BASE_URL + "/login-client", data={"id": id, "password": password})
+    message = str.encode(message)
+    encrypted_message = public_key.encrypt(
+        message,
+        padding.OAEP(
+            mgf=padding.MGF1(algorithm=hashes.SHA256()),
+            algorithm=hashes.SHA256(),
+            label=None
+        )
+    )
+    return encrypted_message
+
+
+def login_client(id, password):
+    encrypted_id = encrypt_message(id)
+    encrypted_password = encrypt_message(password)
+    response = requests.post(BASE_URL + "/login-client", data={"id": base64.b64encode(encrypted_id), "password": base64.b64encode(encrypted_password)})
     print(response.json())
     return response.json()
 
 
 def logout_client(id):
-    public_key = get_public_key()
-    # TODO: encrypt data using public (Giaco)
-    response = requests.delete(BASE_URL + "/logout-client", data={"id": id})
+    # TODO: encrypt data using public (Giaco)-->check
+    encrypted_id = encrypt_message(id)
+    response = requests.delete(BASE_URL + "/logout-client", data={"id": base64.b64encode(encrypted_id)})
     print(response.json())
     return response
 
 
 def increase_counter(id, amount):
-    public_key = get_public_key()
-    # TODO: encrypt data using public (Giaco)
-    response = requests.post(BASE_URL + "/increase-counter", data={"id": id, "amount": amount})
+    # TODO: encrypt data using public (Giaco)-->check
+    encrypted_id = encrypt_message(id)
+    encrypted_amount = encrypt_message(amount)
+    response = requests.post(BASE_URL + "/increase-counter", data={"id": base64.b64encode(encrypted_id), "amount": base64.b64encode(encrypted_amount)})
     print(response.json())
     return response
 
 
 def decrease_counter(id, amount):
-    public_key = get_public_key()
-    # TODO: encrypt data using public (Giaco)
-    response = requests.post(BASE_URL + "/decrease-counter", data={"id": id, "amount": amount})
+    # TODO: encrypt data using public (Giaco)--> check
+    encrypted_id = encrypt_message(id)
+    encrypted_amount = encrypt_message(amount)
+    response = requests.post(BASE_URL + "/decrease-counter", data={"id": base64.b64encode(encrypted_id), "amount": base64.b64encode(encrypted_amount)})
     print(response.json())
     return response
 
 
 def get_public_key():
-    response = requests.get(BASE_URL + "/public-key/")
-    return response.json()
+    response = requests.get(BASE_URL + "/public-key")
+    return load_pem_public_key(response.content)
 
 
 def initialize_argparse():
@@ -80,9 +104,13 @@ def initialize_argparse():
 if __name__ == "__main__":
     # source: https://www.geeksforgeeks.org/read-json-file-using-python/
     # Opening JSON file
+    visual.setup_gui()
+
     try:
         args = initialize_argparse()
-        file = open('./data/'+args['file'])
+        # file = open(visual.open_file())
+        path = visual.filenames.pop()
+        file = open(path)
         data = json.load(file)
     except Exception:
         sys.exit("Error: Invalid JSON file provided.")
@@ -113,4 +141,3 @@ if __name__ == "__main__":
         time.sleep(delay)
     logout_client(user_id)
     file.close()
-

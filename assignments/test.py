@@ -1,7 +1,15 @@
+import cryptography
 from cryptography.hazmat.backends import default_backend
-from cryptography.hazmat.primitives.asymmetric import padding, rsa
+from cryptography.hazmat.primitives.asymmetric import rsa
+from cryptography.hazmat.primitives import serialization
+from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.hazmat.primitives import hashes
-import app
+import os
+from OpenSSL import crypto
+
+#getting
+from cryptography.hazmat.primitives.serialization import load_pem_public_key
+from flask import make_response
 
 private_key = rsa.generate_private_key(
     public_exponent=65537,
@@ -10,7 +18,9 @@ private_key = rsa.generate_private_key(
 )
 public_key = private_key.public_key()
 
-message = b'ciao'
+
+#encripting
+message = str.encode('terra')
 
 encrypted = public_key.encrypt(
     message,
@@ -21,6 +31,10 @@ encrypted = public_key.encrypt(
     )
 )
 
+print(len(encrypted))
+print(private_key.key_size)
+#decrypting
+
 original_message = private_key.decrypt(
     encrypted,
     padding.OAEP(
@@ -29,9 +43,7 @@ original_message = private_key.decrypt(
         label=None
     )
 )
-
-print(encrypted)
+original_message
+original_message.decode("utf-8")
 print(original_message)
-
-## TODO: HEROKU CONNECT IT TO GUìITHUB (EASY) --> DDOS
-## TODO: GUNICORN (HARD) --> DDOS
+###

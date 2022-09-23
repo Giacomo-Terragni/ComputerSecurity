@@ -1,5 +1,5 @@
 {"id": "100",
-"password": "eleele",
+"password": "meliandollie",
 "server":
 {
   "ip": "127.0.0.1",
@@ -12,7 +12,22 @@
     "DECREASE 100",
     "DECREASE 100",
     "DECREASE 100",
-    "DECREASE 100"
+    "DECREASE 100",
+    "INCREASE 100",
+    "INCREASE 100",
+    "INCREASE 100",
+    "INCREASE 100",
+    "INCREASE 100",
+    "INCREASE 100",
+    "INCREASE 100",
+    "INCREASE 100",
+    "INCREASE 100",
+    "INCREASE 100",
+    "INCREASE 100",
+    "INCREASE 100",
+    "INCREASE 100",
+    "INCREASE 100",
+    "INCREASE 100"
   ]
 }
 }
