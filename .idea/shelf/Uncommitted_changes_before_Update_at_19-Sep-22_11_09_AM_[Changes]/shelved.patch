@@ -1,0 +1,18 @@
+Index: client-server/app/app.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from flask import Flask, request, make_response\r\nfrom models.models import *\r\n\r\n# This is the server\r\napp = Flask(__name__)\r\n\r\nfmt = '%Y-%m-%d %H:%M:%S'  # for datetime calculations\r\n\r\n\r\n@app.route(\"/login-client\", methods=[\"POST\"])\r\ndef login_client():\r\n    id = request.form[\"id\"]\r\n    password = request.form[\"password\"]\r\n    actions = request.form[\"actions\"]\r\n    actions = Actions\r\n    user = User(id, password, actions)\r\n\r\n    if id not in users:\r\n        try:\r\n            save_user(user)\r\n        except Exception as ex:\r\n            return make_response({\"error\": f\"could not log in {str(ex)}\"}, 400)\r\n        print(users)\r\n        return make_response({\"result\": \"success\"}, 200)\r\n    else:\r\n        # TODO: check password -> GIACO,  ELE\r\n        return make_response({\"result\": \"fail\"}, 400)\r\n\r\n\r\n@app.route(\"/logout-client\", methods=[\"DELETE\"])\r\ndef logout_client():\r\n    id = request.form[\"id\"]\r\n    try:\r\n        delete_user(users[id])\r\n    except Exception as ex:\r\n        return make_response({\"error\": f\"could not log out {str(ex)}\"}, 400)\r\n    print(users)\r\n    return make_response({\"result\": \"success\"}, 200)\r\n\r\n\r\n@app.route(\"/increase-counter\", methods=[\"POST\"])\r\ndef increase_counter():\r\n    id = request.form[\"id\"]\r\n    amount = int(request.form[\"amount\"])\r\n    try:\r\n        #TODO: check that this type of amount input  is correct -> CHIARA\r\n        users[id].counter += amount\r\n    except Exception as ex:\r\n        return make_response({\"error\": f\"unable to increase counter {str(ex)}\"}, 400)\r\n    print(users)\r\n    return make_response({\"result\": \"success\"}, 200)\r\n\r\n\r\n@app.route(\"/decrease-counter\", methods=[\"POST\"])\r\ndef decrease_counter():\r\n    id = request.form[\"id\"]\r\n    amount = int(request.form[\"amount\"])\r\n    try:\r\n        #TODO: check that this type of amount input  is correct -> CHIARA\r\n        users[id].counter -= amount\r\n    except Exception as ex:\r\n        return make_response({\"error\": f\"unable to decrease counter {str(ex)}\"}, 400)\r\n    print(users)\r\n    return make_response({\"result\": \"success\"}, 200)
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/client-server/app/app.py b/client-server/app/app.py
+--- a/client-server/app/app.py	(revision cc15cc0ee963c3c37e71158292fd7e28e69b7450)
++++ b/client-server/app/app.py	(date 1663338056935)
+@@ -11,6 +11,7 @@
+ def login_client():
+     id = request.form["id"]
+     password = request.form["password"]
++
+     actions = request.form["actions"]
+     actions = Actions
+     user = User(id, password, actions)

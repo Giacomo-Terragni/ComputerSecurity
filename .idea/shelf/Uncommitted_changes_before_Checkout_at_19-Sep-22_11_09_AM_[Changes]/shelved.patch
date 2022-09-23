@@ -1,0 +1,49 @@
+Index: client-server/app/app.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from flask import Flask, request, make_response\r\nfrom models.models import *\r\n\r\n# This is the server\r\napp = Flask(__name__)\r\n\r\nfmt = '%Y-%m-%d %H:%M:%S'  # for datetime calculations\r\n\r\n\r\n@app.route(\"/login-client\", methods=[\"POST\"])\r\ndef login_client():\r\n    id = request.form[\"id\"]\r\n    password = request.form[\"password\"]\r\n    hash_id = hash(id)\r\n    hash_password = hash(password)\r\n    user = User(hash_id, hash_password)\r\n    if hash_id not in users:\r\n        try:\r\n            save_user(user)\r\n        except Exception as ex:\r\n            return make_response({\"error\": f\"could not log in {str(ex)}\"}, 400)\r\n        print(users)\r\n        return make_response({\"result\": \"success\"}, 200)\r\n    else:\r\n        for key in users:\r\n            if users[key].password == hash_password:\r\n                return make_response({\"result\": \"success\"}, 200)\r\n        return make_response({\"result\": \"fail\"}, 400)\r\n\r\n\r\n\r\n@app.route(\"/logout-client\", methods=[\"DELETE\"])\r\ndef logout_client():\r\n    id = request.form[\"id\"]\r\n    try:\r\n        delete_user(users[id])\r\n    except Exception as ex:\r\n        return make_response({\"error\": f\"could not log out {str(ex)}\"}, 400)\r\n    print(users)\r\n    return make_response({\"result\": \"success\"}, 200)\r\n\r\n\r\n@app.route(\"/increase-counter\", methods=[\"POST\"])\r\ndef increase_counter():\r\n    id = request.form[\"id\"]\r\n    amount = int(request.form[\"amount\"])\r\n    try:\r\n        #TODO: check that this type of amount input  is correct -> CHIARA\r\n        users[id].counter += amount\r\n    except Exception as ex:\r\n        return make_response({\"error\": f\"unable to increase counter {str(ex)}\"}, 400)\r\n    print(users)\r\n    return make_response({\"result\": \"success\"}, 200)\r\n\r\n\r\n@app.route(\"/decrease-counter\", methods=[\"POST\"])\r\ndef decrease_counter():\r\n    id = request.form[\"id\"]\r\n    amount = int(request.form[\"amount\"])\r\n    try:\r\n        #TODO: check that this type of amount input  is correct -> CHIARA\r\n        users[id].counter -= amount\r\n    except Exception as ex:\r\n        return make_response({\"error\": f\"unable to decrease counter {str(ex)}\"}, 400)\r\n    print(users)\r\n    return make_response({\"result\": \"success\"}, 200)\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/client-server/app/app.py b/client-server/app/app.py
+--- a/client-server/app/app.py	(revision 83fc78e1e6412dd54cbaf57cc9d930e002e96cd7)
++++ b/client-server/app/app.py	(date 1663578577207)
+@@ -11,10 +11,11 @@
+ def login_client():
+     id = request.form["id"]
+     password = request.form["password"]
+-    hash_id = hash(id)
+-    hash_password = hash(password)
+-    user = User(hash_id, hash_password)
+-    if hash_id not in users:
++    actions = request.form["actions"]
++    actions = Actions
++    user = User(id, password, actions)
++
++    if id not in users:
+         try:
+             save_user(user)
+         except Exception as ex:
+@@ -22,13 +23,10 @@
+         print(users)
+         return make_response({"result": "success"}, 200)
+     else:
+-        for key in users:
+-            if users[key].password == hash_password:
+-                return make_response({"result": "success"}, 200)
++        # TODO: check password -> GIACO,  ELE
+         return make_response({"result": "fail"}, 400)
+ 
+ 
+-
+ @app.route("/logout-client", methods=["DELETE"])
+ def logout_client():
+     id = request.form["id"]
+@@ -63,5 +61,4 @@
+     except Exception as ex:
+         return make_response({"error": f"unable to decrease counter {str(ex)}"}, 400)
+     print(users)
+-    return make_response({"result": "success"}, 200)
+-
++    return make_response({"result": "success"}, 200)
+\ No newline at end of file
