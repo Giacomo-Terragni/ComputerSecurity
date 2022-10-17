@@ -1,4 +1,4 @@
-{"id": "abc",
+{"id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
 "password": "123",
 "server":
 {
@@ -8,9 +8,9 @@
 "actions": {
   "delay": "1",
   "steps": [
-    "INCREASE 999999999999999999999",
+    "INCREASE 100",
     "DECREASE 100",
-    "DECREASE 999999999999999999999",
+    "DECREASE 100",
     "INCREASE 100",
     "INCREASE 100",
     "INCREASE 100"

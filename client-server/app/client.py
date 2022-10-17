@@ -95,60 +95,45 @@ if __name__ == "__main__":
 
     try:
         ip = data["server"]["ip"]
-
         if ip == "":
             sys.exit("Error: empty ip.")
-
     except KeyError:
         sys.exit("Error: ip not in json file.")
 
     try:
         port = data["server"]["port"]
-
         if port == "":
             sys.exit("Error: empty port.")
-
     except KeyError:
         sys.exit("Error: port not in json file.")
 
     try:
         user_id = data["id"]
-
         if user_id == "":
             sys.exit("Error: empty user id.")
-
-        if len(user_id) > 100:
+        if len(user_id) > 190:
             sys.exit("Error: user id too long (maximum 100 characters).")
-
     except KeyError:
         sys.exit("Error: user id not in json file.")
 
     try:
         password = data["password"]
-
         if password == "":
             sys.exit("Error: empty password.")
-
-        if len(password) > 100:
+        if len(password) > 190:
             sys.exit("Error: password too long (maximum 100 characters).")
-
     except KeyError:
         sys.exit("Error: password not in json file.")
 
     try:
         delay = data["actions"]["delay"]
-
         if delay == "":
             sys.exit("Error: empty delay.")
-
         delay = int(delay)
-
         if delay <= 0:
             sys.exit("Error: negative or 0 delay.")
-
         if delay >= 86401:
             sys.exit("Error: delay should be at most 86400 seconds (1 day).")
-
     except KeyError:
         sys.exit("Error: delay not in json file.")
     except ValueError:
