@@ -9,7 +9,7 @@ def open_file():
     # Ask for path of json file
     filepath = askopenfilename(filetypes=[("Json Files", "*.json")], parent=root)
     root.destroy()
-    print('path: ', filepath)
+    print('file path:', filepath)
 
     if filepath:
         filenames.append(filepath)

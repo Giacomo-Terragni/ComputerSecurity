@@ -6,9 +6,6 @@ import time
 import sys
 import argparse
 from gui import visual
-from cryptography.hazmat.backends import default_backend
-from cryptography.hazmat.primitives.asymmetric import rsa
-from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.hazmat.primitives import hashes
 
@@ -16,29 +13,6 @@ from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.serialization import load_pem_public_key
 
 BASE_URL = ""
-
-choices_list = {
-    "type": "list",
-    "name": "choice",
-    "message": "What would you like to do?",
-    "choices": ["Increase", "Decrease", "Log out"],
-}
-
-final_list = {
-    "type": "list",
-    "name": "choice",
-    "message": "What would you like to do?",
-    "choices": ["Log in again", "Quit"],
-}
-
-login_questions = [
-    {"type": "input", "message": "ID", "name": "id"},
-    {"type": "input", "message": "Password", "name": "password"}
-]
-
-amount_questions = [
-    {"type": "input", "message": "Amount", "name": "amount"}
-]
 
 
 def encrypt_message(message):
@@ -58,18 +32,12 @@ def encrypt_message(message):
 def login_client(id, password):
     encrypted_id = encrypt_message(id)
     encrypted_password = encrypt_message(password)
-    try:
-        response = requests.post(BASE_URL + "/login-client", data={"id": base64.b64encode(encrypted_id), "password": base64.b64encode(encrypted_password)})
-        print(response.json())
-
-    except Exception:
-        sys.exit("Error: Invalid combination of ip and port")
-
+    response = requests.post(BASE_URL + "/login-client", data={"id": base64.b64encode(encrypted_id), "password": base64.b64encode(encrypted_password)})
+    print(response.json())
     return response.json()
 
 
 def logout_client(id):
-    # TODO: encrypt data using public (Giaco)-->check
     encrypted_id = encrypt_message(id)
     response = requests.delete(BASE_URL + "/logout-client", data={"id": base64.b64encode(encrypted_id)})
     print(response.json())
@@ -77,7 +45,6 @@ def logout_client(id):
 
 
 def increase_counter(id, amount):
-    # TODO: encrypt data using public (Giaco)-->check
     encrypted_id = encrypt_message(id)
     encrypted_amount = encrypt_message(amount)
     response = requests.post(BASE_URL + "/increase-counter", data={"id": base64.b64encode(encrypted_id), "amount": base64.b64encode(encrypted_amount)})
@@ -86,7 +53,6 @@ def increase_counter(id, amount):
 
 
 def decrease_counter(id, amount):
-    # TODO: encrypt data using public (Giaco)--> check
     encrypted_id = encrypt_message(id)
     encrypted_amount = encrypt_message(amount)
     response = requests.post(BASE_URL + "/decrease-counter", data={"id": base64.b64encode(encrypted_id), "amount": base64.b64encode(encrypted_amount)})
@@ -113,7 +79,6 @@ if __name__ == "__main__":
 
     try:
         args = initialize_argparse()
-        # file = open(visual.open_file())
         path = visual.filenames.pop()
         file = open(path)
         data = json.load(file)
