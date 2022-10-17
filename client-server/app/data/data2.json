@@ -2,15 +2,15 @@
 "password": "123",
 "server":
 {
-  "ip": "1270.0.1",
-  "port": "500"
+  "ip": "127.0.0.1",
+  "port": "5000"
 },
 "actions": {
   "delay": "1",
   "steps": [
-    "INCREASE 100",
+    "INCREASE 999999999999999999999",
     "DECREASE 100",
-    "DECREASE 100",
+    "DECREASE 999999999999999999999",
     "INCREASE 100",
     "INCREASE 100",
     "INCREASE 100"

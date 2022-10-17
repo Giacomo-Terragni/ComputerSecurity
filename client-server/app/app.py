@@ -81,7 +81,7 @@ def increase_counter():
         return make_response({"error": f"amount provided is negative"}, 400)
 
     if amount > 1000000000:
-        return make_response({"error": f"amount provided is too big"}, 400)
+        return make_response({"error": f"amount provided is too big (max: 1000000000)"}, 400)
 
     try:
         users[hash(id)].counter += amount
@@ -102,6 +102,9 @@ def decrease_counter():
 
     if amount < 0:
         return make_response({"error": f"amount provided is negative"}, 400)
+
+    if amount > 1000000000:
+        return make_response({"error": f"amount provided is too big (max: 1000000000)"}, 400)
 
     try:
         if (users[hash(id)].counter - amount) < 0:
