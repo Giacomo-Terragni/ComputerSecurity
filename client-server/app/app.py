@@ -9,12 +9,11 @@ from cryptography.hazmat.primitives import hashes
 # This is the server
 app = Flask(__name__)
 FILENAME = "./logs/logs.txt"
-private_key = get_private_key()
-public_key = get_public_key(private_key)
+server = Server()
 
 
 def decrypt_message(message):
-    decrypted_message = private_key.decrypt(
+    decrypted_message = server.private_key.decrypt(
         message,
         padding.OAEP(
             mgf=padding.MGF1(algorithm=hashes.SHA256()),
@@ -23,6 +22,7 @@ def decrypt_message(message):
         )
     )
     return decrypted_message.decode("utf-8")
+
 
 
 def update_log(user_id, action, counter):
@@ -113,7 +113,11 @@ def decrease_counter():
 
 @app.route("/public-key", methods=["GET"])
 def get_public_key():
+    private_key = generate_private_key()
+    server.private_key = private_key
+    public_key = generate_public_key(private_key)
     return make_response(public_key.public_bytes(
         encoding=serialization.Encoding.PEM,
         format=serialization.PublicFormat.SubjectPublicKeyInfo
     ))
+

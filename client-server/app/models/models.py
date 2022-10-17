@@ -16,6 +16,12 @@ class User:
     def __repr__(self):
         return f'Client({self.id}, {self.password}, {self.counter})'
 
+class Server:
+    def __init__(self):
+        self.private_key = generate_private_key()
+        self.public_key = generate_public_key(self.private_key)
+
+
 
 def save_user(client: User):
     users[client.id] = client
@@ -30,17 +36,16 @@ def hash(input: str):
     return hashed_input
 
 
-def get_public_key(private_key):
+def generate_public_key(private_key):
     public_key = private_key.public_key()
     return public_key
 
 
-def get_private_key():
+def generate_private_key():
     private_key = rsa.generate_private_key(
         public_exponent=65537,
         key_size=2048,
         backend=default_backend()
     )
     return private_key
-
 

@@ -8,6 +8,7 @@ import argparse
 from gui import visual
 from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.hazmat.primitives import hashes
+from models.models import *
 
 # This class should not use models so that client-server structure is separated
 from cryptography.hazmat.primitives.serialization import load_pem_public_key
