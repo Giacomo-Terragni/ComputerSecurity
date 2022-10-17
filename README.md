@@ -57,17 +57,17 @@ Make sure the file is in the following format:
 ## 3. Responses
 If everything went well, you should see this in the terminal where the client was read:
 
-![alt text](resources/Image%2020-09-2022%20at%2019.13.jpg)
+![alt text](resources/success.jpg)
 
 The errors for each action are handled separately.
 If the client has an invalid value for the amount of **INCREASE** or **DECREASE** inside the actions,
 the user will see the errors in the terminal as output. For example, for this client:
 
-![alt text](resources/Image%2020-09-2022%20at%2019.19.jpg)
+![alt text](resources/json.jpg)
 
 You should see the following output:
 
-![alt text](resources/Image%2020-09-2022%20at%2019.18.jpg)
+![alt text](resources/error.jpg)
 
 ## 4. Log file
 All outputs from the actions executed on the clients counter are stored in a log file in *app/logs/logs.txt*. 
