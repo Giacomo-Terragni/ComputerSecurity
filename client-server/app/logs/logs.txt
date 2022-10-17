@@ -58,3 +58,11 @@ ID: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 ID: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa | INCREASE 100 | COUNTER: 1900
 ID: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa | INCREASE 100 | COUNTER: 2000
 ID: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa | INCREASE 100 | COUNTER: 2100
+ID: abc | NEW LOG IN | COUNTER: 0
+ID: abc | INCREASE 100 | COUNTER: 100
+ID: abc | INCREASE 100 | COUNTER: 200
+ID: abc | INCREASE 100 | COUNTER: 300
+ID: abc | NEW LOG IN | COUNTER: 0
+ID: abc | INCREASE 100 | COUNTER: 100
+ID: abc | INCREASE 100 | COUNTER: 200
+ID: abc | INCREASE 100 | COUNTER: 300

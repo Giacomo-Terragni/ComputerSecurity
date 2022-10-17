@@ -121,6 +121,10 @@ if __name__ == "__main__":
     except Exception:
         sys.exit("Error: Invalid JSON file provided.")
 
+    # Delete the following two lines
+    BASE_URL = 'http://' + data["server"]["ip"] + ':' + data["server"]["port"]
+    print('URL:', BASE_URL)
+
     try:
         ip = data["server"]["ip"]
 
