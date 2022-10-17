@@ -121,10 +121,6 @@ if __name__ == "__main__":
     except Exception:
         sys.exit("Error: Invalid JSON file provided.")
 
-    # Delete the following two lines
-    BASE_URL = 'http://' + data["server"]["ip"] + ':' + data["server"]["port"]
-    print('URL:', BASE_URL)
-
     try:
         ip = data["server"]["ip"]
 
@@ -145,6 +141,10 @@ if __name__ == "__main__":
 
     try:
         user_id = data["id"]
+
+        # Delete the following two lines
+        BASE_URL = 'http://' + data["server"]["ip"] + ':' + data["server"]["port"]
+        print('URL:', BASE_URL)
 
         if user_id == "":
             sys.exit("Error: empty user id.")
