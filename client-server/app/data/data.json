@@ -1,0 +1,24 @@
+{"id": "100",
+"password": "meliandollie",
+"server":
+{
+  "ip": "127.0.0.1",
+  "port": "5000"
+},
+"actions": {
+  "delay": "2",
+  "steps": [
+    "INCREASE 1",
+    "INCREASE 1",
+    "DECREASE 5",
+    "INCREASE 1",
+    "INCREASE 5",
+    "INCREASE 1",
+    "INCREASE 5",
+    "INCREASE 1",
+    "INCREASE 5",
+    "INCREASE 1",
+    "INCREASE 5"
+  ]
+}
+}
