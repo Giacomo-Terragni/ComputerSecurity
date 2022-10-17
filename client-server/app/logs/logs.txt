@@ -1,0 +1,60 @@
+ID: 100 | NEW LOG IN | COUNTER: 0
+ID: 100 | INCREASE 1 | COUNTER: 1
+ID: 100 | INCREASE 1 | COUNTER: 2
+ID: 100 | INCREASE 1 | COUNTER: 3
+ID: 100 | INCREASE 5 | COUNTER: 8
+ID: 100 | INCREASE 1 | COUNTER: 9
+ID: 100 | INCREASE 5 | COUNTER: 14
+ID: 100 | INCREASE 1 | COUNTER: 15
+ID: 100 | INCREASE 5 | COUNTER: 20
+ID: 100 | INCREASE 1 | COUNTER: 21
+ID: 100 | INCREASE 5 | COUNTER: 26
+ID: 100 | NEW LOG IN | COUNTER: 0
+ID: 100 | INCREASE 2000 | COUNTER: 2000
+ID: 100 | DECREASE 100 | COUNTER: 1900
+ID: 100 | DECREASE 100 | COUNTER: 1800
+ID: 100 | DECREASE 100 | COUNTER: 1700
+ID: 100 | DECREASE 100 | COUNTER: 1600
+ID: 100 | INCREASE 100 | COUNTER: 1700
+ID: 100 | INCREASE 100 | COUNTER: 1800
+ID: 100 | INCREASE 100 | COUNTER: 1900
+ID: 100 | INCREASE 100 | COUNTER: 2000
+ID: 100 | INCREASE 100 | COUNTER: 2100
+ID: 100 | INCREASE 100 | COUNTER: 2200
+ID: 100 | INCREASE 100 | COUNTER: 2300
+ID: 100 | INCREASE 100 | COUNTER: 2400
+ID: 1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 | NEW LOG IN | COUNTER: 0
+ID: 1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 | INCREASE 2000 | COUNTER: 2000
+ID: 1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 | DECREASE 100 | COUNTER: 1900
+ID: 1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 | DECREASE 100 | COUNTER: 1800
+ID: 1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 | INCREASE 100 | COUNTER: 1900
+ID: 1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 | INCREASE 100 | COUNTER: 2000
+ID: 1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 | INCREASE 100 | COUNTER: 2100
+ID: 100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 | NEW LOG IN | COUNTER: 0
+ID: 100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 | INCREASE 2000 | COUNTER: 2000
+ID: 100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 | DECREASE 100 | COUNTER: 1900
+ID: 100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 | DECREASE 100 | COUNTER: 1800
+ID: 100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 | INCREASE 100 | COUNTER: 1900
+ID: 100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 | INCREASE 100 | COUNTER: 2000
+ID: 100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 | INCREASE 100 | COUNTER: 2100
+ID: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa | NEW LOG IN | COUNTER: 0
+ID: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa | INCREASE 2000 | COUNTER: 2000
+ID: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa | DECREASE 100 | COUNTER: 1900
+ID: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa | DECREASE 100 | COUNTER: 1800
+ID: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa | INCREASE 100 | COUNTER: 1900
+ID: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa | INCREASE 100 | COUNTER: 2000
+ID: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa | INCREASE 100 | COUNTER: 2100
+ID: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa | NEW LOG IN | COUNTER: 0
+ID: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa | INCREASE 2000 | COUNTER: 2000
+ID: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa | DECREASE 100 | COUNTER: 1900
+ID: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa | DECREASE 100 | COUNTER: 1800
+ID: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa | INCREASE 100 | COUNTER: 1900
+ID: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa | INCREASE 100 | COUNTER: 2000
+ID: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa | INCREASE 100 | COUNTER: 2100
+ID: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa | NEW LOG IN | COUNTER: 0
+ID: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa | INCREASE 2000 | COUNTER: 2000
+ID: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa | DECREASE 100 | COUNTER: 1900
+ID: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa | DECREASE 100 | COUNTER: 1800
+ID: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa | INCREASE 100 | COUNTER: 1900
+ID: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa | INCREASE 100 | COUNTER: 2000
+ID: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa | INCREASE 100 | COUNTER: 2100

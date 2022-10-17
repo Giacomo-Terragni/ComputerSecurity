@@ -58,8 +58,13 @@ def encrypt_message(message):
 def login_client(id, password):
     encrypted_id = encrypt_message(id)
     encrypted_password = encrypt_message(password)
-    response = requests.post(BASE_URL + "/login-client", data={"id": base64.b64encode(encrypted_id), "password": base64.b64encode(encrypted_password)})
-    print(response.json())
+    try:
+        response = requests.post(BASE_URL + "/login-client", data={"id": base64.b64encode(encrypted_id), "password": base64.b64encode(encrypted_password)})
+        print(response.json())
+
+    except Exception:
+        sys.exit("Error: Invalid combination of ip and port")
+
     return response.json()
 
 
@@ -112,15 +117,75 @@ if __name__ == "__main__":
         path = visual.filenames.pop()
         file = open(path)
         data = json.load(file)
+
     except Exception:
         sys.exit("Error: Invalid JSON file provided.")
 
     try:
+        ip = data["server"]["ip"]
+
+        if ip == "":
+            sys.exit("Error: empty ip.")
+
+    except KeyError:
+        sys.exit("Error: ip not in json file.")
+
+    try:
+        port = data["server"]["port"]
+
+        if port == "":
+            sys.exit("Error: empty port.")
+
+    except KeyError:
+        sys.exit("Error: port not in json file.")
+
+    try:
+        user_id = data["id"]
+
+        if user_id == "":
+            sys.exit("Error: empty user id.")
+
+        if len(user_id) > 100:
+            sys.exit("Error: user id too long (maximum 100 characters).")
+
+    except KeyError:
+        sys.exit("Error: user id not in json file.")
+
+    try:
+        password = data["password"]
+
+        if password == "":
+            sys.exit("Error: empty password.")
+
+        if len(password) > 100:
+            sys.exit("Error: password too long (maximum 100 characters).")
+
+    except KeyError:
+        sys.exit("Error: password not in json file.")
+
+    try:
+        delay = data["actions"]["delay"]
+
+        if delay == "":
+            sys.exit("Error: empty delay.")
+
+        delay = int(delay)
+
+        if delay <= 0:
+            sys.exit("Error: negative or 0 delay.")
+
+        if delay >= 86401:
+            sys.exit("Error: delay should be at most 86400 seconds (1 day).")
+
+    except KeyError:
+        sys.exit("Error: delay not in json file.")
+    except ValueError:
+        sys.exit("Error: delay is not an integer.")
+
+    try:
         BASE_URL = 'http://' + data["server"]["ip"] + ':' + data["server"]["port"]
         print(BASE_URL)
-        user_id = data["id"]
-        password = data["password"]
-        delay = int(data["actions"]["delay"])
+
     except KeyError:
         sys.exit("Error: Input file does not contain right input format.")
 

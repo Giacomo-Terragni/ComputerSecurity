@@ -17,7 +17,8 @@ Initialize a server by typing:
 
 You should be able to see the following in your  terminal:
 
-![alt text](resources/Image%2020-09-2022%20at%2019.12.jpg)
+![alt text](resources/flask.jpg)
+<img src="resources/flask.jpg" width=800 height=100>
 
 ## 2. Clients
 Open a new terminal in the same location as **client.py** and start the program by typing:
