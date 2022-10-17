@@ -71,6 +71,13 @@ def initialize_argparse():
     return vars(parser.parse_args())
 
 
+def check_connection(ip, port):
+    if ip == "127.0.0.1" and port == "5000":
+        return True
+    else:
+        return False
+
+
 # python client.py --file data.json
 if __name__ == "__main__":
     # source: https://www.geeksforgeeks.org/read-json-file-using-python/
@@ -148,8 +155,12 @@ if __name__ == "__main__":
         sys.exit("Error: delay is not an integer.")
 
     try:
-        BASE_URL = 'http://' + data["server"]["ip"] + ':' + data["server"]["port"]
-        print(BASE_URL)
+        ip = data["server"]["ip"]
+        port = data["server"]["port"]
+        if not check_connection(ip, port):
+            sys.exit("Error: Input file does not contain right IP and port.")
+        BASE_URL = 'http://' + ip + ':' + port
+        print('URL:', BASE_URL)
 
     except KeyError:
         sys.exit("Error: Input file does not contain right input format.")
