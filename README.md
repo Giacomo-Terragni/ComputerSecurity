@@ -1,5 +1,5 @@
 # Computer Security
-Eric Banzuzi, Rosamelia Carioni, Chiara Paglioni, Elena Perego, Giacomo Terragni
+Giacomo Terragni, Eric Banzuzi, Rosamelia Carioni, Chiara Paglioni, Elena Perego
 
 ## UML Diagram
 
